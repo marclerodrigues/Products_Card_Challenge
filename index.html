@@ -1,0 +1,64 @@
+<html lang="en" class="html">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <title>Products Card Challenge </title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="main.js">
+  </script>
+</head>
+
+<body class="body" >
+  <div class="card">
+    <div class="below-banner" >
+      <div class="banner"> 
+        <h1 class="banner__title">Nike</h1>
+      </div>
+    
+    </div>
+    
+    <div class="card__content">
+      <div class="product-introduction">
+        <h2 class="products-name" id="products-name">Nike Zoom KD 12</h2>
+        <label for="products-name" class="new selected-color">New</label>
+      </div>
+      
+      <h4 class="products-slogan">Men's Running Shoes</h4>
+      <div class="divider"></div>
+      <h3 class="section-title">Product Info</h3>
+      <p class="product-info">Ensure a comfortable running session by wearing this pair of cool running shoes from Nike.</p>
+      <div class="divider"></div>
+      <h3 class="section-title">Color</h3>
+      <div class="colors">
+        <span class="colors__item blue colors__item--selected" onclick="selectColor(this)"></span>
+        <span class="colors__item red" onclick="selectColor(this)"></span>
+        <span class="colors__item green" onclick="selectColor(this)"></span>
+        <span class="colors__item orange" onclick="selectColor(this)"></span>
+        <span class="colors__item black" onclick="selectColor(this)"></span>
+      </div>
+      <div class="divider"></div>
+      <h3 class="section-title">Sizes</h3>
+      <div class="sizes">
+        <span class="sizes__item sizes__item--selected selected-color" onclick="selectSize(this)">7</span>
+        <span class="sizes__item " onclick="selectSize(this)">8</span>
+        <span class="sizes__item " onclick="selectSize(this)">9</span>
+        <span class="sizes__item " onclick="selectSize(this)">10</span>
+        <span class="sizes__item " onclick="selectSize(this)">11</span>
+      </div>
+      <div class="divider"></div>
+      <div class="totalizer">
+        <button class="add-cart selected-color" onclick="scaleButton(this)">Add to Cart</button>
+        <p class="total">149.99</p>
+      </div>
+    </div>
+
+  </div>
+  
+</body>
+
+</html>
