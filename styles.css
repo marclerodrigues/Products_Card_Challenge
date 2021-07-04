@@ -99,6 +99,7 @@
   background-color: var(--white);
   border-radius: 50%;
   border-width: 0;
+  cursor: pointer;
   height: 2.1rem;
   outline: none;
   position: absolute;
@@ -276,6 +277,7 @@
   align-items: center;
   border: none;
   color: var(--white);
+  cursor: pointer;
   display: flex;
   font-size: 1rem;
   font-weight: 600;
@@ -285,7 +287,7 @@
   transition: 0.4s;
 }
 
-.add-cart {
+.add-cart:hover {
   transform: scale(1.075);
 }
 
