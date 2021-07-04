@@ -50,7 +50,7 @@ const updateElementsColor = (currentColor, changeUrl = true) => {
           );
 
           document
-            .querySelector(".share-icon")
+            .querySelector(".share__icon")
             .style.setProperty("fill", `var(--light-${Colors[key]})`);
         } else {
           element.style.setProperty(
@@ -59,7 +59,7 @@ const updateElementsColor = (currentColor, changeUrl = true) => {
           );
 
           document
-            .querySelector(".share-icon")
+            .querySelector(".share__icon")
             .style.setProperty("fill", `var(--${Colors[key]})`);
         }
       }

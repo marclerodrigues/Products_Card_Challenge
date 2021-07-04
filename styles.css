@@ -95,7 +95,7 @@
   opacity: 0.1;
 }
 
-.share-button {
+.share__button {
   background-color: var(--white);
   border-radius: 50%;
   border-width: 0;
@@ -108,10 +108,10 @@
   width: 2.1rem;
 }
 
-.share-button:hover {
+.share__button:hover {
   transform: scale(1.075);
 }
-.share-icon {
+.share__icon {
   fill: var(--light-blue);
   height: 50%;
 }
