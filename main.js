@@ -19,7 +19,7 @@ const getCurrentColor = () => {
 const getCssBackgroundColor = (key) =>
   `linear-gradient(45deg,var(--${Colors[key]}),var(--light-${Colors[key]}))`;
 
-const updateElementsColor = (currentColor) => {
+const updateElementsColor = (currentColor, changeUrl = true) => {
   const elementsWithColor = document.querySelectorAll(".selected-color");
   const colorSelected = document.querySelector(".colors__item--selected");
 
@@ -48,11 +48,19 @@ const updateElementsColor = (currentColor) => {
             "background-color",
             `var(--light-${Colors[key]})`
           );
+
+          document
+            .querySelector(".share-icon")
+            .style.setProperty("fill", `var(--light-${Colors[key]})`);
         } else {
           element.style.setProperty(
             "background-color",
             `var(--${Colors[key]})`
           );
+
+          document
+            .querySelector(".share-icon")
+            .style.setProperty("fill", `var(--${Colors[key]})`);
         }
       }
 
@@ -74,7 +82,6 @@ const updateElementsColor = (currentColor) => {
 };
 
 const selectColor = (element) => {
-  removeScaleButton();
   const currentColor = getCurrentColor();
 
   const items = document.querySelectorAll(".colors__item");
@@ -92,8 +99,6 @@ const selectColor = (element) => {
 };
 
 const selectSize = (element) => {
-  removeScaleButton();
-
   const items = document.querySelectorAll(".sizes__item");
   const selectedStr = "sizes__item--selected";
 
@@ -107,14 +112,5 @@ const selectSize = (element) => {
   element.classList.add(selectedStr, "selected-color");
 
   const currentColor = getCurrentColor();
-  updateElementsColor(currentColor);
-};
-
-const scaleButton = (element) => {
-  element.style.setProperty("transform", "scale(1.15)");
-};
-
-const removeScaleButton = () => {
-  const button = document.querySelector(".add-cart");
-  button.style.removeProperty("transform");
+  updateElementsColor(currentColor, false);
 };
