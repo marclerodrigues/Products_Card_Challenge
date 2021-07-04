@@ -95,6 +95,27 @@
   opacity: 0.1;
 }
 
+.share-button {
+  background-color: var(--white);
+  border-radius: 50%;
+  border-width: 0;
+  height: 2.1rem;
+  outline: none;
+  position: absolute;
+  right: 0.25rem;
+  top: 0.25rem;
+  transition: 0.4s;
+  width: 2.1rem;
+}
+
+.share-button:hover {
+  transform: scale(1.075);
+}
+.share-icon {
+  fill: var(--light-blue);
+  height: 50%;
+}
+
 .shoes {
   height: 112.5%;
   right: 1.15rem;
@@ -259,8 +280,13 @@
   font-size: 1rem;
   font-weight: 600;
   justify-content: space-evenly;
-  padding: 0.5rem 0.75rem;
   outline: none;
+  padding: 0.5rem 0.75rem;
+  transition: 0.4s;
+}
+
+.add-cart {
+  transform: scale(1.075);
 }
 
 .shopping-cart-icon {
@@ -271,8 +297,15 @@
 
 .total {
   color: var(--mine-shaft);
-  font-size: 1.75rem;
+  display: flex;
+  font-size: 1.5rem;
   font-weight: 600;
+}
+
+.dollar-sign {
+  height: 0.75rem;
+  margin-top: 0.25rem;
+  margin-right: 0.15rem;
 }
 
 .selected-color {
