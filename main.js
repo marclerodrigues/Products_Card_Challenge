@@ -34,7 +34,7 @@ const updateElementsColor = (currentColor, changeUrl = true) => {
   for (const key in Colors) {
     if (colorSelected.classList.contains(Colors[key])) {
       // Updates the image based on Color
-      const img = document.querySelector(".shoes");
+      const img = document.querySelector(".shoes.active");
       img.src = `assets/img/${Colors[key]}.png`;
 
       //updates the color of each element in `elementsWithColor`

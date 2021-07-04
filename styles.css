@@ -122,9 +122,15 @@
   right: 1.15rem;
   position: absolute;
   transform: rotate(-15deg);
+  display: none;
 
   animation: flow 1.5s ease-in infinite;
 }
+
+.active {
+  display: block;
+}
+
 @keyframes flow {
   0% {
     top: -10;
