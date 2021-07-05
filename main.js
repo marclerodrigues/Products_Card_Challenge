@@ -105,7 +105,7 @@ const share = () => {
 
   document.execCommand("copy");
 
-  console.log("copied ", input.value)
+  console.log("copied ", input.value);
   document.body.removeChild(input);
 };
 
@@ -132,3 +132,7 @@ const selectFirstOptions = () => {
 document.addEventListener("DOMContentLoaded", () => {
   selectFirstOptions();
 });
+
+window.onpopstate = () => {
+  selectFirstOptions();
+};
