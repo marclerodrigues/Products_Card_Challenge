@@ -52,6 +52,11 @@ const selectColor = (element) => {
   const selectedString = "colors__item--selected";
   const colorSelected = document.querySelector(`.${selectedString}`);
 
+
+  if (colorSelected === element) {
+    return;
+  }
+
   colorSelected.classList.remove(selectedString);
 
   element.classList.add(selectedString);
@@ -63,6 +68,10 @@ const selectSize = (element) => {
   const itemSelected = "sizes__item--selected";
   const controlClass = "selected-color";
   const item = document.querySelector(`.${itemSelected}`);
+
+  if (item === element) {
+    return;
+  }
 
   item.classList.remove(itemSelected, controlClass);
   element.classList.add(itemSelected, controlClass);
