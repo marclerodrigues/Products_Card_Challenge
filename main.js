@@ -1,116 +1,138 @@
-const Colors = Object.freeze({
-  BLUE: "blue",
-  RED: "red",
-  GREEN: "green",
-  ORANGE: "orange",
-  BLACK: "black",
-});
-
-const getCurrentColor = () => {
-  const colorSelected = document.querySelector(".colors__item--selected");
-
-  for (const key in Colors) {
-    if (colorSelected.classList.contains(Colors[key])) {
-      return key;
-    }
-  }
+const getCssBackgroundColor = (color) => {
+  return `linear-gradient(45deg,var(--${color}),var(--light-${color}))`;
 };
 
-const getCssBackgroundColor = (key) =>
-  `linear-gradient(45deg,var(--${Colors[key]}),var(--light-${Colors[key]}))`;
-
-const updateElementsColor = (currentColor, changeUrl = true) => {
-  const elementsWithColor = document.querySelectorAll(".selected-color");
+const updateElementsColor = () => {
   const colorSelected = document.querySelector(".colors__item--selected");
+  const sizeSelected = document.querySelector(".sizes__item--selected");
+  const currentColor = colorSelected.dataset.color;
+  const currentSize = sizeSelected.dataset.size;
+  const currentImage = document.querySelector(".shoes.active");
+  const newImage = document.querySelector(`.shoes[data-color=${currentColor}`);
 
-  // Updates below banner color allowing the effect
-  // of sliding the new selected color
+  currentImage.classList.remove("active");
+  newImage.classList.add("active");
+
+  const elementsWithColor = document.querySelectorAll(".selected-color");
+  const sizes = document.querySelectorAll(".sizes__item");
+  const lightColors = ["blue", "black", "green"];
+  const banner = document.querySelector(".banner");
   const belowBanner = document.querySelector(".below-banner");
+  const shareIcon = document.querySelector(".share__icon");
+  const cssColor = lightColors.includes(currentColor)
+    ? `var(--light-${currentColor})`
+    : `var(--${currentColor})`;
+
+  sizes.forEach((element) =>
+    element.style.setProperty("background-color", "var(--alto)")
+  );
+  elementsWithColor.forEach((element) =>
+    element.style.setProperty("background-color", cssColor)
+  );
+
+  banner.style.setProperty(
+    "background-image",
+    getCssBackgroundColor(currentColor)
+  );
+
+  if (!banner.classList.contains(currentColor)) {
+    banner.classList.add("change-color-animation");
+    banner.style.animation = "none";
+    banner.offsetHeight;
+    banner.style.animation = null;
+  }
+
   belowBanner.style.setProperty(
     "background-image",
     getCssBackgroundColor(currentColor)
   );
 
-  for (const key in Colors) {
-    if (colorSelected.classList.contains(Colors[key])) {
-      // Updates the image based on Color
-      const img = document.querySelector(".shoes.active");
-      img.src = `assets/img/${Colors[key]}.png`;
+  shareIcon.style.setProperty("fill", cssColor);
 
-      //updates the color of each element in `elementsWithColor`
-      for (const element of elementsWithColor) {
-        if (
-          Colors[key] === "blue" ||
-          Colors[key] == "black" ||
-          Colors[key] == "green"
-        ) {
-          element.style.setProperty(
-            "background-color",
-            `var(--light-${Colors[key]})`
-          );
+  updateHistory(currentColor, currentSize);
+};
 
-          document
-            .querySelector(".share__icon")
-            .style.setProperty("fill", `var(--light-${Colors[key]})`);
-        } else {
-          element.style.setProperty(
-            "background-color",
-            `var(--${Colors[key]})`
-          );
+const updateHistory = (color, size) => {
+  const search = new URLSearchParams();
 
-          document
-            .querySelector(".share__icon")
-            .style.setProperty("fill", `var(--${Colors[key]})`);
-        }
-      }
+  search.append("color", color);
+  search.append("size", size);
 
-      // Updates the banner color
-      const banner = document.querySelector(".banner");
-      banner.style.setProperty("background-image", getCssBackgroundColor(key));
+  const url = `${window.location.pathname}?${search.toString()}`;
 
-      // restart the animation
-      if (currentColor !== key) {
-        banner.classList.add("change-color-animation");
-        banner.style.animation = "none";
-        banner.offsetHeight;
-        banner.style.animation = null;
-      }
-
-      break;
-    }
-  }
+  history.pushState("new-page", document.title, url);
 };
 
 const selectColor = (element) => {
-  const currentColor = getCurrentColor();
+  const selectedString = "colors__item--selected";
+  const colorSelected = document.querySelector(`.${selectedString}`);
 
-  const items = document.querySelectorAll(".colors__item");
-  const selectedStr = "colors__item--selected";
-
-  for (const item of items) {
-    if (item.classList.contains(selectedStr)) {
-      item.classList.remove(selectedStr);
-    }
+  if (colorSelected === element) {
+    return;
   }
 
-  element.classList.add(selectedStr);
+  colorSelected.classList.remove(selectedString);
 
-  updateElementsColor(currentColor);
+  element.classList.add(selectedString);
+
+  updateElementsColor();
 };
 
 const selectSize = (element) => {
-  const items = document.querySelectorAll(".sizes__item");
-  const selectedStr = "sizes__item--selected";
+  const itemSelected = "sizes__item--selected";
+  const controlClass = "selected-color";
+  const item = document.querySelector(`.${itemSelected}`);
 
-  for (const item of items) {
-    if (item.classList.contains(selectedStr)) {
-      item.classList.remove(selectedStr, "selected-color");
-      item.style.setProperty("background-color", "var(--alto");
-    }
+  if (item === element) {
+    return;
   }
 
-  element.classList.add(selectedStr, "selected-color");
+  item.classList.remove(itemSelected, controlClass);
+  element.classList.add(itemSelected, controlClass);
 
-  const currentColor = getCurrentColor();
-  updateElementsColor(currentColor, false);
+  updateElementsColor();
+};
+
+const share = () => {
+  const input = document.createElement("input");
+
+  document.body.appendChild(input);
+
+  input.value = window.location.href;
+
+  input.focus();
+  input.select();
+
+  document.execCommand("copy");
+
+  console.log("copied ", input.value);
+  document.body.removeChild(input);
+};
+
+const selectFirstOptions = () => {
+  const search = new URLSearchParams(window.location.search);
+
+  for (let entry of search) {
+    const [key, value] = entry;
+
+    if (key === "color") {
+      const color = document.querySelector(
+        `.colors__item[data-color=${value}]`
+      );
+      selectColor(color);
+    }
+
+    if (key === "size") {
+      const size = document.querySelector(`.sizes__item[data-size="${value}"]`);
+      selectSize(size);
+    }
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  selectFirstOptions();
+});
+
+window.onpopstate = () => {
+  selectFirstOptions();
 };

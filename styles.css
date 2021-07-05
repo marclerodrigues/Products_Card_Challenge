@@ -225,7 +225,8 @@
   width: 1rem;
   transition: 0.4s;
 }
-.blue {
+.blue,
+.colors__item--blue {
   background-color: var(--light-blue);
 }
 
@@ -233,18 +234,22 @@
   box-shadow: 0 0 10px 0.5px rgb(0 0 0 / 20%);
 }
 
-.red {
+.red,
+.colors__item--red {
   background-color: var(--red);
 }
 
-.green {
+.green,
+.colors__item--green {
   background-color: var(--light-green);
 }
 
-.orange {
+.orange,
+.colors__item--orange {
   background-color: var(--orange);
 }
-.black {
+.black,
+.colors__item--black {
   background-color: var(--light-black);
 }
 
@@ -435,7 +440,6 @@
     align-self: center;
     box-shadow: 15px 0 35px rgb(0 0 0 / 10%), 0 -15px 35px rgb(0 0 0 / 10%),
       0 15px 35px rgb(0 0 0 / 10%);
-
   }
 
   @keyframes flow {
