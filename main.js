@@ -4,7 +4,9 @@ const getCssBackgroundColor = (color) => {
 
 const updateElementsColor = () => {
   const colorSelected = document.querySelector(".colors__item--selected");
+  const sizeSelected = document.querySelector(".sizes__item--selected");
   const currentColor = colorSelected.dataset.color;
+  const currentSize = sizeSelected.dataset.size;
   const currentImage = document.querySelector(".shoes.active");
   const newImage = document.querySelector(`.shoes[data-color=${currentColor}`);
 
@@ -46,12 +48,24 @@ const updateElementsColor = () => {
   );
 
   shareIcon.style.setProperty("fill", cssColor);
+
+  updateHistory(currentColor, currentSize);
+};
+
+const updateHistory = (color, size) => {
+  const search = new URLSearchParams();
+
+  search.append("color", color);
+  search.append("size", size);
+
+  const url = `${window.location.pathname}?${search.toString()}`;
+
+  history.pushState("new-page", document.title, url);
 };
 
 const selectColor = (element) => {
   const selectedString = "colors__item--selected";
   const colorSelected = document.querySelector(`.${selectedString}`);
-
 
   if (colorSelected === element) {
     return;
