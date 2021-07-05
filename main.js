@@ -1,5 +1,5 @@
 const getCssBackgroundColor = (color) => {
-  return `linear-gradient(45deg,var(--${color}),var(--light-${color}))`
+  return `linear-gradient(45deg,var(--${color}),var(--light-${color}))`;
 };
 
 const updateElementsColor = () => {
@@ -7,7 +7,7 @@ const updateElementsColor = () => {
   const currentColor = colorSelected.dataset.color;
   const currentImage = document.querySelector(".shoes.active");
   const newImage = document.querySelector(`.shoes[data-color=${currentColor}`);
-  
+
   currentImage.classList.remove("active");
   newImage.classList.add("active");
 
@@ -16,14 +16,23 @@ const updateElementsColor = () => {
   const lightColors = ["blue", "black", "green"];
   const banner = document.querySelector(".banner");
   const belowBanner = document.querySelector(".below-banner");
-  const shareIcon = document.querySelector(".share__icon"); 
-  const cssColor = lightColors.includes(currentColor) ? `var(--light-${currentColor})`: `var(--${currentColor})`;
+  const shareIcon = document.querySelector(".share__icon");
+  const cssColor = lightColors.includes(currentColor)
+    ? `var(--light-${currentColor})`
+    : `var(--${currentColor})`;
 
-  sizes.forEach((element) => element.style.setProperty("background-color", "var(--alto)"));
-  elementsWithColor.forEach((element) => element.style.setProperty("background-color", cssColor));
+  sizes.forEach((element) =>
+    element.style.setProperty("background-color", "var(--alto)")
+  );
+  elementsWithColor.forEach((element) =>
+    element.style.setProperty("background-color", cssColor)
+  );
 
-  banner.style.setProperty("background-image", getCssBackgroundColor(currentColor));
-  
+  banner.style.setProperty(
+    "background-image",
+    getCssBackgroundColor(currentColor)
+  );
+
   if (!banner.classList.contains(currentColor)) {
     banner.classList.add("change-color-animation");
     banner.style.animation = "none";
@@ -35,9 +44,9 @@ const updateElementsColor = () => {
     "background-image",
     getCssBackgroundColor(currentColor)
   );
-    
+
   shareIcon.style.setProperty("fill", cssColor);
-}
+};
 
 const selectColor = (element) => {
   const selectedString = "colors__item--selected";
