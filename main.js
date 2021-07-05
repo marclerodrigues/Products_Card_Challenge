@@ -92,3 +92,27 @@ const selectSize = (element) => {
 
   updateElementsColor();
 };
+
+const selectFirstOptions = () => {
+  const search = new URLSearchParams(window.location.search);
+
+  for (let entry of search) {
+    const [key, value] = entry;
+
+    if (key === "color") {
+      const color = document.querySelector(
+        `.colors__item[data-color=${value}]`
+      );
+      selectColor(color);
+    }
+
+    if (key === "size") {
+      const size = document.querySelector(`.sizes__item[data-size="${value}"]`);
+      selectSize(size);
+    }
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  selectFirstOptions();
+});
