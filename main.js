@@ -93,6 +93,22 @@ const selectSize = (element) => {
   updateElementsColor();
 };
 
+const share = () => {
+  const input = document.createElement("input");
+
+  document.body.appendChild(input);
+
+  input.value = window.location.href;
+
+  input.focus();
+  input.select();
+
+  document.execCommand("copy");
+
+  console.log("copied ", input.value)
+  document.body.removeChild(input);
+};
+
 const selectFirstOptions = () => {
   const search = new URLSearchParams(window.location.search);
 
